@@ -1,0 +1,17 @@
+﻿@model Department
+<h1 class="alert alert-danger text-center display-3" style="background-color:white;color:darkgreen">
+    Are you Sure You Want to Delete
+</h1>
+<dl class="row">
+    <dt class="col-2">ID</dt>
+    <dd class="col-10">@Model.Id</dd>
+    <dt class="col-2">Name</dt>
+    <dd class="col-10">@Model.Name</dd>
+    <dt class="col-2">Description</dt>
+    <dd class="col-10">@Model.Description</dd>
+</dl>
+<form method="post" asp-controller="Departments" asp-action="DeleteCurrent">
+    <input type="hidden" asp-for="Id"/>
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+<a asp-controller="Departments" asp-action="GetIndexView">Back to Department</a>

@@ -1,0 +1,27 @@
+﻿@model Department
+<h1 style="background-color:white;color:darkgreen;text-align:center">
+    Hello Doctors Pleas Sign_In Now
+</h1>
+<div class="row">
+<form method="post" class="form-control col-4" asp-controller="Departments" asp-action="AddDepartment" >
+    <div asp-validation-summary="All" class="text-danger" action="AddNe"></div>
+    <div>
+        <label>
+            Name
+        </label>
+            <input type="text" asp-for="Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div style="margin-top:10px;">
+        <label>
+                Description
+        </label>
+            <input type="text" asp-for="Description" class="form-control" />
+            <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+    <div style="margin-top:10px;">
+        <button class="btn btn-primary mt-1" type="submit">Add</button>
+    </div>
+</form>
+</div>
+<a asp-controller="Departments" asp-action="GetIndexView">Back to Department</a>

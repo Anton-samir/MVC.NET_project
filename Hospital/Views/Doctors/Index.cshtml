@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Doctor>
+<h1 style="background-color:white; text-align:center; color:darkgreen">
+    Index Doctors list_Table
+</h1>
+<div class="row">
+    <form method="get" asp-controller="Doctors" asp-action="GetIndexView" class=" mb-3 col-3">
+    <div class="input-group mb-3 col-3 ">
+        <input type="text" name="Search" class="form-control" value="@ViewBag.CurrentSearch" />
+        <button type="submit" class="btn btn-secondary input-group-addon">
+            <i class="bi bi-search"></i>
+        </button>
+    </div>
+</form></div>
+<form method="get" asp-controller="Doctors" asp-action="GetIndexView">
+
+    <div class="row offset-2 pb-3 ">
+         <div class=" col-4">
+            <input type="number" name="pageNumber" id="search" placeholder="Enter page number" class="form-control col-12" />
+            </div>
+        <div class=" col-4">
+            <input type="number" name="pageSize" id="search" placeholder="Enter page size" class="form-control col-12" />
+        </div>
+        </div>
+    <div class="row offset-2 pb-3 ">
+
+        <div class=" col-4">
+            <input name="search" id="search" placeholder="Enter User Name" class="form-control col-12" />
+            </div>
+        <div class=" col-4 ">
+            <button type="submit" class="col-8 btn btn-outline-dark"> Search     <i class="bi bi-search"></i></button>
+
+        </div>
+    </div>
+</form>
+@if (Model.Count() > 0)
+{
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(e=>e.Id)</th>
+                
+                <th>
+                    <div style="width:50%;float:left;text-align:left;background-color:darkblue">
+                        @Html.DisplayNameFor(e=>e.FullName)
+                    </div>
+                    <div style="width:50%;float:right;text-align:right;background-color:darkblue">
+                        <a asp-controller="Doctors" asp-action="GetIndexView"
+                       asp-route-sortType="FullName" asp-route-sortOrder="asc"
+                       asp-route-search="@ViewBag.CurrentSearch" asp-route-pageSize="@ViewBag.PageSize" asp-route-pageNumber="@ViewBag.pageNumber"
+                       style="text-decoration:none">
+                            <i class="bi bi-arrow-up"></i>
+                        </a>
+                        <a asp-controller="Doctors" asp-action="GetIndexView" asp-route-sortType="FullName" asp-route-sortOrder="desc" asp-route-search="@ViewBag.CurrentSearch" asp-route-pageSize="@ViewBag.PageSize" asp-route-pageNumber="@ViewBag.pageNumber" style="text-decoration:none">
+                            <i class="bi bi-arrow-down"></i>
+                        </a>
+                    </div>
+                    </th>
+                <th>
+                    <div style="width:50%;float:left;text-align:left;background-color:darkblue">
+                        @Html.DisplayNameFor(e=>e.Postion)
+                    </div>
+                    <div style="width:50%;float:right;text-align:right;background-color:darkblue">
+                        <a asp-controller="Doctors" asp-action="GetIndexView" asp-route-sortType="Postion" asp-route-sortOrder="desc" asp-route-search="@ViewBag.CurrentSearch" asp-route-pageSize="@ViewBag.PageSize" asp-route-pageNumber="@ViewBag.pageNumber" style="text-decoration:none">
+                            <i class="bi bi-arrow-up"></i>
+                        </a>
+                        <a asp-controller="Doctors" asp-action="GetIndexView" asp-route-sortType="Postion" asp-route-sortOrder="desc" asp-route-search="@ViewBag.CurrentSearch" asp-route-pageSize="@ViewBag.PageSize" asp-route-pageNumber="@ViewBag.pageNumber" style="text-decoration:none">
+                            <i class="bi bi-arrow-down"></i>
+                        </a>
+                    </div>
+                </th>
+                <th>
+                    <div style="width:50%;float:left;text-align:left;background-color:darkblue">
+                        @Html.DisplayNameFor(e=>e.Salary)
+                    </div>
+                    <div style="width:50%;float:right;text-align:right;background-color:darkblue">
+                        <a asp-controller="Doctors" asp-action="GetIndexView" asp-route-sortType="Salary" asp-route-sortOrder="asc" asp-route-search="@ViewBag.CurrentSearch" asp-route-pageSize="@ViewBag.PageSize" asp-route-pageNumber="@ViewBag.pageNumber" style="text-decoration:none">
+                            <i class="bi bi-arrow-up"></i>
+                        </a>
+                        <a asp-controller="Doctors" asp-action="GetIndexView" asp-route-sortType="Salary" asp-route-sortOrder="desc" asp-route-search="@ViewBag.CurrentSearch" asp-route-pageSize="@ViewBag.PageSize" asp-route-pageNumber="@ViewBag.pageNumber" style="text-decoration:none">
+                            <i class="bi bi-arrow-down"></i>
+                        </a>
+                    </div>
+                </th>
+                <th> </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.FullName</td>
+                    <td>@item.Postion</td>
+                    <td>@item.Salary</td>
+                    <td> <a a asp-controller="Doctors" asp-action="GetDetailsView" asp-route-id="@item.Id" class="btn btn-success"><i class="bi bi-list-columns-reverse"></i></a> </td>
+                    <td> <a a asp-controller="Doctors" asp-action="GetEditView" asp-route-id="@item.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a> </td>
+                    <td>
+                        <a a asp-controller="Doctors" asp-action="GetDeleteView" asp-route-id="@item.Id" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></a>
+                        <form method="post" asp-controller="Doctors" asp-action="DeleteCurrent" asp-route-id="@item.Id" class="d-inline">
+                            <input type="hidden" asp-for="@item.Id" />
+                            <button type="submit" onclick="return ConfirmDelete()" class="btn btn-warning">Immediate Delete</button>
+                        </form>
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="3">Total</th>
+                <td> @Model.Sum(tack => tack.Salary)</td>
+            </tr>
+        </tfoot>
+        <a asp-controller="Doctors" asp-action="GetCreateView" class="btn btn-success ">Add_Now_New_Doctor </a>
+        
+    </table>
+}
+else
+{
+    <div class="alert alert-danger text-center text-danger ">There Is No Data.</div>
+}
+<a asp-controller="Home" class="btn btn-dark asp-action="Index">Back to Home Page</a>
+@section Scripts{
+    <script>
+        function ConfirmDelete() {
+            let deleteConfirmed =confirm("Are you Sure you want to delete?");
+            return deleteConfirmed;
+        }
+        //alert("Welcom to Employee")
+        function ContactUs() {
+            alert("info@sunrisco.com")
+        }
+
+        function GreetUser() {
+            let name = prompt("Enter Your Name");
+            if (name != null && name != "")
+                alert("Hello," + name + "!")
+        }
+        function Acceptlicence() {
+            let LiceneceAccepted = confirm("Do You Want Accepted our Licence");
+            if (LiceneceAccepted == true)
+                alert("You Accepted our Licence Agreement.");
+            else
+                alert("You Not Accepted our Licence Agreement.")
+        }
+    </script>
+}

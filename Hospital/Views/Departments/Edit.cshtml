@@ -1,0 +1,28 @@
+﻿@model Department
+<h1 style="background-color:white; text-align:center; color:darkgreen">
+    Edit Current Department
+</h1>
+<div class="row">
+<form method="post" class=" col-3" asp-controller="Departments" asp-action="EditCurrent">
+    <div asp-validation-summary="All" class="text-danger" action="AddNe"></div>
+    <input type="hidden" asp-for="Id"/>
+    <div>
+        <label>
+            Full Name
+        </label>
+        <input type="text" asp-for="Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div style="margin-top:10px;">
+        <label>
+            Postion
+        </label>
+            <input type="text" asp-for="Description" class="form-control" />
+            <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+    <div style="margin-top:10px;">
+        <button class="btn btn-primary mt-1" type="submit">Edit</button>
+    </div>
+</form>
+</div>
+<a asp-controller="Departments" asp-action="GetIndexView">Back to Department</a>

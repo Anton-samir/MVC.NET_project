@@ -1,0 +1,122 @@
+﻿@model Doctor
+<h1 style="background-color:white;color:darkgreen;text-align:center">
+    Edit Current Employee
+</h1>
+
+<div class="row">
+    <form method="post" class=" col-3" asp-controller="Doctors" asp-action="EditCurrent" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger" action="AddNe"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CreatedAt" />
+        <input type="hidden" asp-for="ImageUrl" />
+        <div>
+            <label asp-for="FullName">
+                
+            </label>
+            <input type="text"  class="form-control" />
+            <span class="text-danger" asp-validation-for="FullName"></span>
+        </div>
+        <div style="margin-top:10px;">
+            <label asp-for="Postion">
+                
+            </label>
+            <input type="text"  class="form-control" />
+            <span class="text-danger" asp-validation-for="Postion"></span>
+        </div>
+        <div style="margin-top:10px;">
+            <label>
+                Salary
+            </label>
+            <input type="number" asp-for="Salary" class="form-control" />
+            <span class="text-danger" asp-validation-for="Salary"></span>
+        </div>
+
+        <div>
+            <label>Bonus</label>
+            <input type="number" asp-for="Bonus" class="form-control" />
+            <span asp-validation-for="Bonus" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label>Phone Number</label>
+            <input type="text" asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label>Email Address</label>
+            <input type="email" asp-for="EmailAddress" class="form-control" />
+            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label>Confirm Email</label>
+            <input type="email" asp-for="ConfirmEmail" class="form-control" />
+            <span asp-validation-for="ConfirmEmail" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label>Password</label>
+            <input type="password" asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label>Confirm Password</label>
+            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label>Hiring Date & Time</label>
+            <input asp-for="HiringDateTime" class="form-control" />
+            <span asp-validation-for="HiringDateTime" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label>Birth Date</label>
+            <input type="date" asp-for="BirthDate" class="form-control" />
+            <span asp-validation-for="BirthDate" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label>AttendanceTime</label>
+            <input type="time" asp-for="AttendanceTime" class="form-control" />
+            <span asp-validation-for="AttendanceTime" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label>Leaving Time</label>
+            <input type="time" asp-for="LeavingTime" class="form-control" />
+            <span asp-validation-for="LeavingTime" class="text-danger"></span>
+        </div>
+        <div style="margin-top:10px;">
+            <label asp-for="DepartmentId">
+                
+            </label>
+            <select class="form-control"  asp-items="@(new SelectList(ViewBag.AllDepartments,"Id","Name"))">
+                <option disabled selected>Select...</option>
+            </select>
+        </div>
+        <div style="margin-top:10px;">
+            <label asp-for="ImageUrl">
+            </label>
+            <input type="file" name="imagefile" id="imagefile" asp-for="ImageUrl" class="form-control" onchange="addimg()" />
+            <span class="text-danger" asp-validation-for="ImageUrl"></span>
+        </div>
+
+        <div style="margin-top:10px;">
+            <button class="btn btn-primary mt-1" type="submit">Edit</button>
+        </div>
+    </form>
+    <img src="@Html.DisplayFor(e=>e.ImageUrl)" id="empimg" class="col-4" style="max-height:200px; padding:10px;" />
+</div>
+<a asp-controller="Doctors" asp-action="GetIndexView">Back to employee</a>
+@section Scripts{
+    <script>
+        function addimg() {
+            document.getElementById('empimg').src = window.URL.createObjectURL(document.getElementById("imagefile").files[0]);
+        }
+
+    </script>
+}
